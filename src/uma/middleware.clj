@@ -16,13 +16,13 @@
 ;; Logging Middleware
 
 (defn wrap-request-logger [handler]
-  (fn [req]
-    (timbre/info "REQUEST ::" (dissoc response :body))
-    (handler req)))
+  (fn [request]
+    (timbre/info "REQUEST ::" (dissoc request :body))
+    (handler request)))
 
 (defn wrap-response-logger [handler]
-  (fn [req]
-    (let [response (handler req)]
+  (fn [request]
+    (let [response (handler request)]
       (timbre/info "RESPONSE ::" (dissoc response :body))
       response)))
 
