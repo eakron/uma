@@ -3,12 +3,13 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [uma.middleware :as middleware]
-            [uma.logging]))
+            [uma.logging]
+            [uma.utilities :as utilities]
+            [uma.routes.users :as users]))
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
-  (route/resources "/")
-  (route/not-found "Not Found"))
+  (ANY "/users" [] users/resource)
+  (utilities/not-found))
 
 (def app
   (-> (handler/api app-routes)
