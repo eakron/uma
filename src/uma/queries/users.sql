@@ -1,4 +1,4 @@
 -- name: all-users
 -- Find all users.
 SELECT *
-FROM users
+FROM uma_user
