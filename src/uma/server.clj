@@ -8,7 +8,7 @@
             [uma.routes.users :as users]))
 
 (defroutes app-routes
-  (ANY "/users" [] users/resource)
+  (ANY "/users" [] users/routes)
   (utilities/not-found))
 
 (def app
