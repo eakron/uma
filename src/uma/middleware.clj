@@ -48,18 +48,3 @@
                    (assoc :json-params json)
                    (update-in [:params] merge json)))
       (handler request))))
-
-(defn wrap-json-response
-  "Middleware that converts responses with a map or a vector for a body into a
-   JSON response. Accepts the following options:
-   :pretty - when true, pretty-print the JSON
-   :escape-non-ascii - when true, non-ASCII characters are escaped with \\u"
-  [handler]
-  (fn [request]
-    (let [response (handler request)]
-      (if (coll? (:body response))
-        (let [json-response (update-in response [:body] json/generate-string)]
-          (if (contains? (:headers response) "Content-Type")
-            json-response
-            (content-type json-response "application/json; charset=utf-8")))
-        response))))

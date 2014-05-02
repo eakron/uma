@@ -1,11 +1,13 @@
-(ns uma.utilities)
+(ns uma.utilities
+  (require [cheshire.core :refer [generate-string]]))
 
 (defn json-response
   "Wraps data with a simple Ring response object
    and optional status code. Also renames :_id to :id."
   [data & [status]]
-  {:status (or status 200)
-   :body data})
+  (generate-string
+    {:status (or status 200)
+     :body data}))
 
 (defn not-found []
   (fn [request]

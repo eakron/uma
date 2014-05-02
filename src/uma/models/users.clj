@@ -5,4 +5,4 @@
 (defqueries "uma/queries/users.sql")
 
 (defn get-users [_]
-  (all-users db/spec))
+  (get-users-raw db/spec))

@@ -16,5 +16,4 @@
       (middleware/wrap-request-logger)
       (middleware/wrap-json-params)
       (middleware/wrap-response-logger)
-      (middleware/wrap-json-response)
       (middleware/wrap-exception)))
