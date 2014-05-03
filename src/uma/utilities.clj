@@ -7,9 +7,8 @@
   "Wraps data with a simple Ring response object
    and optional status code. Also renames :_id to :id."
   [data & [status]]
-  (generate-string
-    {:status (or status 200)
-     :body data}))
+  {:status (or status 200)
+   :body (generate-string data)})
 
 (defn not-found []
   (fn [request]
