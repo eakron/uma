@@ -1,17 +1,9 @@
 (ns uma.models.users
   (require [uma.database :as db]
-           [yesql.core :refer [defqueries]]))
+           [korma.core :refer :all]))
 
-(defqueries "uma/queries/users.sql")
+(defentity users
+  (table :uma_user))
 
-(defn get-users [_]
-  (get-users-raw db/spec))
-
-(defn create-user [user]
-  (create-user-raw<! db/spec user))
-
-(defn get-user-by-id [id]
-  (get-user-by-id-raw db/spec id))
-
-(defn update-user [id user]
-  (update-user-raw! db/spec id user))
+(defn get-users []
+ (select users))

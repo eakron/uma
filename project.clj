@@ -6,7 +6,12 @@
                  [liberator "0.11.0"]
                  [yesql "0.4.0"]
                  [postgresql "9.3-1101.jdbc4"]
-                 [environ "0.5.0"]]
+                 [environ "0.5.0"]
+                 [korma "0.3.1"]
+                 [log4j "1.2.15" :exclusions [javax.mail/mail
+                                              javax.jms/jms
+                                              com.sun.jdmk/jmxtools
+                                              com.sun.jmx/jmxri]]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler uma.server/app}
   :profiles

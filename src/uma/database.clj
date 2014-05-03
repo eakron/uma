@@ -1,8 +1,9 @@
 (ns uma.database
-  (require [environ.core :refer [env]]))
+  (require [environ.core :refer [env]]
+           [korma.db :refer [defdb postgres]]))
 
-(def spec {:classname "org.postgresql.Driver"
-           :subprotocol "postgresql"
-           :subname (env :database-address)
-           :user (env :database-user)
-           :password (env :database-password)})
+(defdb db (postgres {:db (env :database-name)
+                     :user (env :database-user)
+                     :password (env :database-password)
+                     :host (env :database-host)
+                     :port "5432"}))
