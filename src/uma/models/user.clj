@@ -1,26 +1,26 @@
-(ns uma.models.users
+(ns uma.models.user
   (require [uma.database :as db]
            [korma.core :refer :all]))
 
-(defentity users
+(defentity user
   (table :uma_user))
 
 (defn get-users []
- (select users))
+ (select user))
 
 (defn get-user-by-id [id]
-  (select users
+  (select user
     (where {:id id})))
 
 (defn create-user [user]
-  (insert users
+  (insert user
     (values user)))
 
 (defn update-user [id user]
-  (update users
+  (update user
     (set-fields user)
     (where {:id id})))
 
 (defn delete-user [id]
-  (delete users
+  (delete user
     (where {:id id})))

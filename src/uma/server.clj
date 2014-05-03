@@ -5,10 +5,10 @@
             [uma.middleware :as middleware]
             [uma.logging]
             [uma.utilities :as utilities]
-            [uma.routes.users :as users]))
+            [uma.routes.user :as user]))
 
 (defroutes app-routes
-  (context "/users" [] users/routes)
+  (context "/users" [] user/routes)
   (utilities/not-found))
 
 (def app
