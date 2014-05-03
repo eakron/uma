@@ -10,14 +10,16 @@
 (defresource create-resource resource-defaults
   :post! users/create-user)
 
-(defresource get-resource-by-id resource-defaults
-  :handle-ok users/get-user-by-id)
+(defresource get-resource-by-id [id] resource-defaults
+  :handle-ok
+    (let [as-integer (Integer. id)]
+      (users/get-user-by-id as-integer)))
 
 (defresource update-resource resource-defaults
   :post! users/update-user)
 
 (defroutes routes
-  (GET "/users" request get-resource)
-  (POST "/users" request create-resource)
-  (GET "/users/:id" request get-resource-by-id)
-  (POST "/users/:id" request update-resource))
+  (GET "/" request get-resource)
+  (POST "/" request create-resource)
+  (GET "/:id" [id] (get-resource-by-id id))
+  (POST "/:id" request update-resource))
