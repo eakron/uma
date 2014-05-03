@@ -5,10 +5,16 @@
             [uma.middleware :as middleware]
             [uma.logging]
             [uma.utilities :as utilities]
-            [uma.routes.user :as user]))
+            [uma.routes.user :as user]
+            [uma.routes.horse :as horse]
+            [uma.routes.occasion :as occasion]
+            [uma.routes.course :as course]))
 
 (defroutes app-routes
   (context "/users" [] user/routes)
+  (context "/horses" [] horse/routes)
+  (context "/courses" [] course/routes)
+  (context "/occasions" [] occasion/routes)
   (utilities/not-found))
 
 (def app
