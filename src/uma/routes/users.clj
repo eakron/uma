@@ -9,16 +9,20 @@
 
 (defresource create-resource [user] resource-defaults
   :allowed-methods [:post]
-  :post! (users/create-user user))
+  :post! {::user (users/create-user user)}
+  :handle-created ::user)
 
 (defresource get-resource-by-id [id] resource-defaults
   :handle-ok (let [as-integer (Integer. id)]
                (users/get-user-by-id as-integer)))
 
-(defresource update-resource [id user] resource-defaults
+(defresource update-resource [{:keys [id] :as user}] resource-defaults
   :allowed-methods [:post]
-  :post! (let [as-integer (Integer. id)]
-           (users/update-user id user)))
+  :respond-with-entity true
+  :post! (let [as-integer (Integer. id)
+               mapped (dissoc user :id)]
+           {::user (users/update-user as-integer mapped)})
+  :handle-created ::user)
 
 (defresource delete-resource [id] resource-defaults
   :allowed-methods [:delete]
