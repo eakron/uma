@@ -37,7 +37,6 @@
     (POST "/:id" {:keys [~'params]}
       (resource resource-defaults
         :allowed-methods [:post]
-        :respond-with-entity true
         :post! (let [~'as-integer (Integer. (:id ~'params))
                      ~'mapped (dissoc ~'params :id)]
                  {::user (~update ~'as-integer ~'mapped)})
