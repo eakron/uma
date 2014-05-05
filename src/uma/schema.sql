@@ -50,7 +50,7 @@ create table occasion (
   "startTime" timetz,
   "endTime" timetz,
   "price" integer,
-  "course" integer references course(id),
+  "course_id" integer references course(id),
   "cancelees" integer array);
 
 create table registered (
