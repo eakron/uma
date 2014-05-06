@@ -1,9 +1,7 @@
 (ns uma.models.course
   (require [uma.database :as db]
+           [uma.models.entities :refer [occasion user course]]
            [korma.core :refer :all]))
-
-(defentity course
-  (table :course))
 
 (defn get-courses []
  (select course))

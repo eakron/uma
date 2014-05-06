@@ -1,10 +1,7 @@
 (ns uma.models.occasion
   (require [uma.database :as db]
-           [uma.models.course :refer [course]]
+           [uma.models.entities :refer [course horse occasion]]
            [korma.core :refer :all]))
-
-(defentity occasion
-  (table :occasion))
 
 (defn get-occasions []
  (select occasion))

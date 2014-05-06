@@ -1,9 +1,7 @@
 (ns uma.models.horse
   (require [uma.database :as db]
+           [uma.models.entities :refer [occasion horse]]
            [korma.core :refer :all]))
-
-(defentity horse
-  (table :horse))
 
 (defn get-horses []
  (select horse))
