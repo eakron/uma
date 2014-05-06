@@ -2,10 +2,7 @@
   (require [korma.core :refer [insert values]]
            [uma.database :as db]
            [clojure.java.jdbc :as sql]
-           [uma.models.user :refer [user]]
-           [uma.models.course :refer [course]]
-           [uma.models.horse :refer [horse]]
-           [uma.models.occasion :refer [occasion]]))
+           [uma.models.entities :refer :all]))
 
 (defn as-time [hour minute]
   (java.sql.Time. hour minute 0))
