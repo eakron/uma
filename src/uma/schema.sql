@@ -54,12 +54,12 @@ create table occasion (
   "cancelees" integer array);
 
 create table registered (
-  "user_id" integer references uma_user(id),
+  "uma_user_id" integer references uma_user(id),
   "course_id" integer references course(id)
 );
 
 create table teaches (
-  "user_id" integer references uma_user(id),
+  "uma_user_id" integer references uma_user(id),
   "course_id" integer references course(id)
 );
 
