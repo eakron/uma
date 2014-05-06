@@ -31,13 +31,17 @@
         :username "user3" :student true :streetAddress "r3" :postalCode "3"
         :city "townsville" :notes "noted" :guardians "1 & 2"
         :membershipNumber "1"}]))
-  (insert course (values
-    [{:id 1 :title "course1" :difficulty "easy" :semester "1" :weekday "Monday"
-      :startTime (as-time 14 0) :endTime (as-time 14 0) :seats 1 :price 2 :notes "a"}
-     {:id 2 :title "course2" :difficulty "medium" :semester "1" :notes "a"
-      :startTime (as-time 14 0) :endTime (as-time 14 0) :seats 1 :price 2 :weekday "Monday"}
-     {:id 3 :title "course3" :difficulty "hard" :semester "1" :weekday "Monday"
-      :startTime (as-time 14 0) :endTime (as-time 14 0) :seats 1 :price 2 :notes "a"}]))
+  (insert course
+    (values
+      [{:id 1 :title "course1" :difficulty "easy" :semester "1"
+        :startTime (as-time 14 0) :endTime (as-time 14 0) :seats 1 :price 2
+        :notes "a" :weekday "Monday"}
+       {:id 2 :title "course2" :difficulty "medium" :semester "1" :notes "a"
+        :startTime (as-time 14 0) :endTime (as-time 14 0) :seats 1 :price 2
+        :weekday "Monday"}
+       {:id 3 :title "course3" :difficulty "hard" :semester "1"
+        :startTime (as-time 14 0) :endTime (as-time 14 0) :seats 1 :price 2
+        :notes "a" :weekday "Monday"}]))
   (insert horse
     (values
       [{:id 1 :name "horse1" :year "1999" :height "175" :color "fux"
@@ -49,8 +53,11 @@
   (insert occasion
     (values
       [{:id 1 :date (as-timestamp 2014 05 25) :description "a"
-        :startTime (as-time 14 0) :endTime (as-time 14 0) :price 1 :course_id 1}
+        :startTime (as-time 14 0) :endTime (as-time 14 0) :price 1
+        :course_id 1}
        {:id 2 :date (as-timestamp 2014 05 25) :description "a"
-        :startTime (as-time 14 0) :endTime (as-time 14 0) :price 1 :course_id 1}
+        :startTime (as-time 14 0) :endTime (as-time 14 0) :price 1
+        :course_id 1}
        {:id 3 :date (as-timestamp 2014 05 25) :description "a"
-        :startTime (as-time 14 0) :endTime (as-time 14 0) :price 1 :course_id 1}])))
+        :startTime (as-time 14 0) :endTime (as-time 14 0) :price 1
+        :course_id 1}])))
