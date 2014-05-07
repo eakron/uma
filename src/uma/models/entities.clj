@@ -19,3 +19,15 @@
 (defentity occasion
   (belongs-to course)
   (many-to-many horse :walks))
+
+(defentity registered
+  (belongs-to user)
+  (belongs-to course))
+
+(defentity teaches
+  (belongs-to user)
+  (belongs-to course))
+
+(defentity walks
+  (belongs-to horse)
+  (belongs-to occasion))
