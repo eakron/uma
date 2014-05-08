@@ -5,13 +5,11 @@
 
 (defentity user
   (table :uma_user)
-  (many-to-many course :registered)
-  (many-to-many course :teaches))
+  (many-to-many course :registered))
 
 (defentity course
   (has-many occasion)
-  (many-to-many user :registered)
-  (many-to-many user :teaches))
+  (many-to-many user :registered))
 
 (defentity horse
   (many-to-many occasion :walks))
