@@ -37,8 +37,8 @@ create table course (
   "difficulty" text,
   "semester" text,
   "weekday" text,
-  "startTime" timetz,
-  "endTime" timetz,
+  "startTime" time,
+  "endTime" time,
   "seats" integer,
   "price" integer,
   "notes" text);
@@ -47,8 +47,8 @@ create table occasion (
   "id" serial primary key,
   "date" timestamp,
   "description" text,
-  "startTime" timetz,
-  "endTime" timetz,
+  "startTime" time,
+  "endTime" time,
   "price" integer,
   "course_id" integer references course(id),
   "cancelees" integer array);
