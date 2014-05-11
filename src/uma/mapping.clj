@@ -11,3 +11,12 @@
 
 (defn as-integer-vector [ts]
   (mapv as-integer ts))
+
+(defn apply-mapping [object mapper]
+  (reduce
+    (fn [acc [k v]]
+      (if (contains? object k)
+       (assoc acc k (v (k object)))
+       acc))
+    {}
+    mapper))
