@@ -16,7 +16,7 @@
   (reduce
     (fn [acc [k v]]
       (if (contains? object k)
-       (assoc acc k (v (k object)))
-       acc))
+        (assoc acc k (v (k object)))
+        acc))
     {}
     mapper))
