@@ -3,16 +3,6 @@
            [uma.models.entities :refer [course horse occasion]]
            [korma.core :refer :all]))
 
-(def mapping-model
-  {:id (Integer. id)
-   :date (java.sql.Timestamp. date)
-   :description description
-   :startTime (java.sql.Time. startTime)
-   :endTime (java.sql.Time. endTime)
-   :price (Integer. price)
-   :course_id (Integer. course_id)
-   :cancelees (map #(Integer. %) cancelees)})
-
 (defn get-occasions []
  (select occasion))
 
