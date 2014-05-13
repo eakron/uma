@@ -3,6 +3,9 @@
            [uma.models.entities :refer [course horse occasion]]
            [korma.core :refer :all]))
 
+(defn mapfn [object]
+  object)
+
 (defn get-occasions []
  (select occasion))
 

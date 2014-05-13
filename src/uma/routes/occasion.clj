@@ -7,4 +7,5 @@
    :read-by-id occasion/get-occasion-by-id
    :create occasion/create-occasion
    :update occasion/update-occasion
-   :delete occasion/delete-occasion})
+   :delete occasion/delete-occasion
+   :mapfn occasion/mapfn})

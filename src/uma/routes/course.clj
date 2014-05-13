@@ -9,7 +9,8 @@
    :read-by-id course/get-course-by-id
    :create course/create-course
    :update course/update-course
-   :delete course/delete-course}
+   :delete course/delete-course
+   :mapfn course/mapfn}
   (GET "/:id/users" [id]
     (resource resource-defaults
       :handle-ok (let [as-integer (Integer. id)]

@@ -20,7 +20,7 @@
   {:available-media-types ["application/json"]})
 
 (defmacro defroutes-with-crud
-  [sym {:keys [create read-all read-by-id update delete]} & body]
+  [sym {:keys [create read-all read-by-id update delete mapfn]} & body]
   `(defroutes ~sym
     (GET "/" []
       (resource resource-defaults
@@ -28,7 +28,7 @@
     (POST "/" {:keys [~'params]}
       (resource resource-defaults
         :allowed-methods [:post]
-        :post! {::user (~create ~'params)}
+        :post! {::user (~create (~mapfn ~'params))}
         :handle-created ::user))
     (GET "/:id" [~'id]
       (resource resource-defaults
@@ -38,7 +38,7 @@
       (resource resource-defaults
         :allowed-methods [:post]
         :post! (let [~'as-integer (Integer. (:id ~'params))
-                     ~'mapped (dissoc ~'params :id)]
+                     ~'mapped (~mapfn (dissoc ~'params :id))]
                  {::user (~update ~'as-integer ~'mapped)})
         :handle-created ::user))
     (DELETE "/:id" [~'id]

@@ -7,4 +7,5 @@
    :read-by-id horse/get-horse-by-id
    :create horse/create-horse
    :update horse/update-horse
-   :delete horse/delete-horse})
+   :delete horse/delete-horse
+   :mapfn horse/mapfn})

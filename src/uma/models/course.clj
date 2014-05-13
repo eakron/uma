@@ -3,6 +3,9 @@
            [uma.models.entities :refer [user course registered]]
            [korma.core :refer :all]))
 
+(defn mapfn [object]
+  object)
+
 (defn get-courses []
  (select course))
 
