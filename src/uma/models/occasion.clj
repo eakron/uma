@@ -1,10 +1,18 @@
 (ns uma.models.occasion
   (require [uma.database :as db]
+           [uma.mapping :refer [defmapper]]
            [uma.models.entities :refer [course horse occasion]]
            [korma.core :refer :all]))
 
-(defn mapfn [object]
-  object)
+(defmapper mapfn
+  {:id :integer
+   :date :timestamp
+   :description :string
+   :startTime :time
+   :endTime :time
+   :price :integer
+   :course_id :integer
+   :cancelees :integers})
 
 (defn get-occasions []
  (select occasion))

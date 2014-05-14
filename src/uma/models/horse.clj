@@ -1,10 +1,16 @@
 (ns uma.models.horse
   (require [uma.database :as db]
+           [uma.mapping :refer [defmapper]]
            [uma.models.entities :refer [occasion horse]]
            [korma.core :refer :all]))
 
-(defn mapfn [object]
-  object)
+(defmapper mapfn
+  {:id :integer
+   :name :string
+   :year :string
+   :height :string
+   :color :string
+   :description :string})
 
 (defn get-horses []
  (select horse))

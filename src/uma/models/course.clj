@@ -1,10 +1,20 @@
 (ns uma.models.course
   (require [uma.database :as db]
+           [uma.mapping :refer [defmapper]]
            [uma.models.entities :refer [user course registered]]
            [korma.core :refer :all]))
 
-(defn mapfn [object]
-  object)
+(defmapper mapfn
+  {:id :integer
+   :title :string
+   :difficulty :string
+   :semester :string
+   :weekday :string
+   :startTime :time
+   :endTime :time
+   :seats :integer
+   :price :integer
+   :notes :string})
 
 (defn get-courses []
  (select course))
