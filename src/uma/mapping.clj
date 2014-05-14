@@ -8,10 +8,10 @@
   (Integer. value))
 
 (defmethod map-to-clj :timestamp [_ value]
-  (java.sql.Timestamp. value))
+  (java.sql.Timestamp/valueOf value))
 
 (defmethod map-to-clj :time [_ value]
-  (java.sql.Time. value))
+  (java.sql.Time/valueOf value))
 
 (defmethod map-to-clj :integers [_ value]
   (mapv #(map-to-clj :integer %) value))
