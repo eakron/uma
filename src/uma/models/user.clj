@@ -1,10 +1,25 @@
 (ns uma.models.user
   (require [uma.database :as db]
            [uma.models.entities :refer [course user]]
+           [uma.mapping :refer [defmapper]]
            [korma.core :refer :all]))
 
-(defn mapfn [object]
-  object)
+(defmapper mapfn
+  {:id :integer
+   :firstName :string
+   :lastName :string
+   :personalIDNumber :string
+   :phoneNumbers :string
+   :email :string
+   :password :string
+   :username :string
+   :student :string
+   :streetAddress :string
+   :postalCode :string
+   :city :string
+   :notes :string
+   :guardians :string
+   :membershipNumber :string})
 
 (defn get-users []
   (select user))

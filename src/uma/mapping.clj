@@ -1,22 +1,30 @@
 (ns uma.mapping)
 
-(defn as-integer [i]
-  (Integer. i))
+(defmulti map-to-clj
+  (fn [type _]
+    type))
 
-(defn as-timestamp [t]
-  (java.sql.Timestamp. t))
+(defmethod map-to-clj :integer [_ value]
+  (Integer. value))
 
-(defn as-time [t]
-  (java.sql.Time. t))
+(defmethod map-to-clj :timestamp [_ value]
+  (java.sql.Timestamp. value))
 
-(defn as-integer-vector [ts]
-  (mapv as-integer ts))
+(defmethod map-to-clj :time [_ value]
+  (java.sql.Time. value))
 
-(defn apply-mapping [object mapper]
+(defmethod map-to-clj :integers [_ value]
+  (mapv #(map-to-clj :integer %) value))
+
+(defn apply-mapping [object mapping]
   (reduce
-    (fn [acc [k v]]
-      (if (contains? object k)
-        (assoc acc k (v (k object)))
+    (fn [acc [attribute type]]
+      (if (contains? object attribute)
+        (assoc acc attribute (map-to-clj type (attribute object)))
         acc))
     {}
-    mapper))
+    mapping))
+
+(defmacro defmapper [sym mapping]
+  `(defn ~sym [~'object]
+    (apply-mapping ~'object ~mapping)))
