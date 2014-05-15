@@ -23,13 +23,13 @@
   (select course
     (where {:id id})))
 
-(defn create-course [course]
+(defn create-course [course-map]
   (insert course
-    (values course)))
+    (values course-map)))
 
-(defn update-course [id course]
+(defn update-course [id course-map]
   (update course
-    (set-fields course)
+    (set-fields course-map)
     (where {:id id})))
 
 (defn delete-course [id]

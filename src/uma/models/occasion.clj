@@ -21,13 +21,13 @@
   (select occasion
     (where {:id id})))
 
-(defn create-occasion [occasion]
+(defn create-occasion [occasion-map]
   (insert occasion
-    (values occasion)))
+    (values occasion-map)))
 
-(defn update-occasion [id occasion]
+(defn update-occasion [id occasion-map]
   (update occasion
-    (set-fields occasion)
+    (set-fields occasion-map)
     (where {:id id})))
 
 (defn delete-occasion [id]

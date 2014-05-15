@@ -19,13 +19,13 @@
   (select horse
     (where {:id id})))
 
-(defn create-horse [horse]
+(defn create-horse [horse-map]
   (insert horse
-    (values horse)))
+    (values horse-map)))
 
-(defn update-horse [id horse]
+(defn update-horse [id horse-map]
   (update horse
-    (set-fields horse)
+    (set-fields horse-map)
     (where {:id id})))
 
 (defn delete-horse [id]

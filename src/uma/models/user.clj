@@ -28,13 +28,13 @@
   (select user
     (where {:id id})))
 
-(defn create-user [user]
+(defn create-user [user-map]
   (insert user
-    (values user)))
+    (values user-map)))
 
-(defn update-user [id user]
+(defn update-user [id user-map]
   (update user
-    (set-fields user)
+    (set-fields user-map)
     (where {:id id})))
 
 (defn delete-user [id]
