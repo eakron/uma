@@ -14,3 +14,8 @@
   json/JSONWriter
   (-write [date out]
     (json/-write (str date) out)))
+
+(extend-type java.sql.Timestamp
+  json/JSONWriter
+  (-write [date out]
+    (json/-write (str date) out)))
