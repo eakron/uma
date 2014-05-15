@@ -11,8 +11,7 @@
    :startTime :time
    :endTime :time
    :price :integer
-   :course_id :integer
-   :cancelees :integers})
+   :course_id :integer})
 
 (defn get-occasions []
  (select occasion))

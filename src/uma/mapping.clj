@@ -13,15 +13,14 @@
 (defmethod map-to-clj :time [_ value]
   (java.sql.Time/valueOf value))
 
-(defmethod map-to-clj :integers [_ value]
-  (mapv #(map-to-clj :integer %) value))
-
 (defmethod map-to-clj :default [_ value]
   value)
 
 (defn apply-mapping [object mapping]
+  (println object)
   (reduce
     (fn [acc [attribute type]]
+      (println (str attribute " " type))
       (if (contains? object attribute)
         (assoc acc attribute (map-to-clj type (attribute object)))
         acc))
