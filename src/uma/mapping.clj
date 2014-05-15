@@ -16,6 +16,9 @@
 (defmethod map-to-clj :integers [_ value]
   (mapv #(map-to-clj :integer %) value))
 
+(defmethod map-to-clj :default [_ value]
+  value)
+
 (defn apply-mapping [object mapping]
   (reduce
     (fn [acc [attribute type]]
