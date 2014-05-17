@@ -4,11 +4,14 @@
             [compojure.route :as route]
             [uma.middleware :as middleware]
             [uma.logging]
+            [uma.database :refer [ensure-database!]]
             [uma.utilities :as utilities]
             [uma.routes.user :as user]
             [uma.routes.horse :as horse]
             [uma.routes.occasion :as occasion]
             [uma.routes.course :as course]))
+
+(ensure-database!)
 
 (defroutes app-routes
   (context "/users" [] user/routes)
