@@ -1,10 +1,10 @@
-drop table walks;
-drop table teaches;
-drop table registered;
-drop table occasion;
-drop table course;
-drop table horse;
-drop table uma_user;
+drop table if exists walks;
+drop table if exists teaches;
+drop table if exists registered;
+drop table if exists occasion;
+drop table if exists course;
+drop table if exists horse;
+drop table if exists uma_user;
 
 create table uma_user (
   "id" serial primary key,
