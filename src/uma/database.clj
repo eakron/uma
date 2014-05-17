@@ -30,9 +30,10 @@
     (timbre/info "Database tables created.")))
 
 (defn ensure-database! []
-  (if-let [exists (exec-raw [(str "select exists(
-                                     select * from information_schema.tables
-                                     where table_name='uma_user');")]
+  (let [results (exec-raw [(str "select exists(
+                                  select * from information_schema.tables
+                                  where table_name='uma_user');")]
                          :results)]
-    (timbre/info "Database tables found.")
-    (create-tables!)))
+    (if (:exists (first results))
+      (timbre/info "Database tables found.")
+      (create-tables!))))
