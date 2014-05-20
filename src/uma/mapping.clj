@@ -16,8 +16,10 @@
 (defmethod map-to-clj :default [_ value]
   value)
 
-(defn apply-mapping [object mapping]
-  (println object)
+(defn apply-mapping
+  "Applies a mapping to an object. Not all mapping keys are
+  required to exist in the object. Uses map-to-clj under the hood."
+  [object mapping]
   (reduce
     (fn [acc [attribute type]]
       (println (str attribute " " type))
@@ -27,6 +29,9 @@
     {}
     mapping))
 
-(defmacro defmapper [sym mapping]
+(defmacro defmapper
+  "Binds given symbol to a function which applies the mapping to
+  a given object."
+  [sym mapping]
   `(defn ~sym [~'object]
     (apply-mapping ~'object ~mapping)))
