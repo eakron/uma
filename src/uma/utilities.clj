@@ -5,7 +5,7 @@
 
 (defn json-response
   "Wraps data with a simple Ring response object
-   and optional status code. Also renames :_id to :id."
+   and optional status code."
   [data & [status]]
   {:status (or status 200)
    :body data})
