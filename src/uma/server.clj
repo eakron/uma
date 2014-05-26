@@ -3,6 +3,7 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [uma.middleware :as middleware]
+            [ring.middleware.json :refer [wrap-json-response wrap-json-params]]
             [uma.logging]
             [uma.database :refer [ensure-database!]]
             [uma.utilities :as utilities]
@@ -23,6 +24,7 @@
 (def app
   (-> (handler/api app-routes)
       (middleware/wrap-request-logger)
-      (middleware/wrap-json-params)
+      (wrap-json-params)
+      (wrap-json-response)
       (middleware/wrap-response-logger)
       (middleware/wrap-exception)))

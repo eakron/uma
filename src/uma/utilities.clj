@@ -8,7 +8,7 @@
    and optional status code. Also renames :_id to :id."
   [data & [status]]
   {:status (or status 200)
-   :body (generate-string data)})
+   :body data})
 
 (defn not-found []
   (fn [request]
