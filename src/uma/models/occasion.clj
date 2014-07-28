@@ -17,8 +17,9 @@
  (select occasion))
 
 (defn get-occasion-by-id [id]
-  (select occasion
-    (where {:id id})))
+  (first
+    (select occasion
+      (where {:id id}))))
 
 (defn create-occasion [occasion-map]
   (insert occasion

@@ -17,11 +17,12 @@
    :notes :string})
 
 (defn get-courses []
- (select course))
+  (select course))
 
 (defn get-course-by-id [id]
-  (select course
-    (where {:id id})))
+  (first
+    (select course
+      (where {:id id}))))
 
 (defn create-course [course-map]
   (insert course

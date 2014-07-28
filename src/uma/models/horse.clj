@@ -13,11 +13,12 @@
    :description :string})
 
 (defn get-horses []
- (select horse))
+  (select horse))
 
 (defn get-horse-by-id [id]
-  (select horse
-    (where {:id id})))
+  (first
+    (select horse
+      (where {:id id}))))
 
 (defn create-horse [horse-map]
   (insert horse

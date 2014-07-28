@@ -25,8 +25,9 @@
   (select user))
 
 (defn get-user-by-id [id]
-  (select user
-    (where {:id id})))
+  (first
+    (select user
+      (where {:id id}))))
 
 (defn create-user [user-map]
   (insert user
