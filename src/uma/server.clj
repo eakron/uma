@@ -3,7 +3,7 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [uma.middleware :as middleware]
-            [ring.middleware.json :refer [wrap-json-response wrap-json-params]]
+            [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [uma.logging]
             [uma.database :refer [ensure-database!]]
             [uma.utilities :as utilities]
@@ -15,16 +15,17 @@
 (ensure-database!)
 
 (defroutes app-routes
-  (context "/users" [] user/routes)
-  (context "/horses" [] horse/routes)
-  (context "/courses" [] course/routes)
-  (context "/occasions" [] occasion/routes)
+  (context "/api" [] (routes
+    (context "/users" [] user/routes)
+    (context "/horses" [] horse/routes)
+    (context "/courses" [] course/routes)
+    (context "/occasions" [] occasion/routes)))
   (utilities/not-found))
 
 (def app
   (-> (handler/api app-routes)
       (middleware/wrap-request-logger)
-      (wrap-json-params)
+      (wrap-json-body {:keywords? true})
       (wrap-json-response)
       (middleware/wrap-response-logger)
       (middleware/wrap-exception)))

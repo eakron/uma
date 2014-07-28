@@ -1,7 +1,6 @@
 (ns uma.routes.course
   (require [uma.models.course :as course]
-           [uma.utilities :refer [defroutes-with-crud resource-defaults]]
-           [liberator.core :refer [resource]]
+           [uma.utilities :refer [defroutes-with-crud json-response]]
            [compojure.core :refer [GET]]))
 
 (defroutes-with-crud routes
@@ -12,6 +11,6 @@
    :delete course/delete-course
    :mapfn course/mapfn}
   (GET "/:id/users" [id]
-    (resource resource-defaults
-      :handle-ok (let [as-integer (Integer. id)]
-                   (course/get-registered-users as-integer)))))
+    (json-response
+      (let [as-integer (Integer. id)]
+        (course/get-registered-users as-integer)))))
