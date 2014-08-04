@@ -1,6 +1,7 @@
 (ns uma.logging
   (:require [taoensso.timbre :as t]
-            [taoensso.timbre.appenders.rotor :as r]))
+            [taoensso.timbre.appenders.rotor :as r]
+            [environ.core :refer [env]]))
 
 (t/set-config!
   [:appenders :rotor]
@@ -16,4 +17,4 @@
 
 (t/set-config!
   [:appenders :standard-out :enabled?]
-  false)
+  (or (env :logging) false))
