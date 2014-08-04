@@ -1,11 +1,25 @@
 (ns uma.routes.horse
-  (require [uma.models.horse :as horse]
-           [uma.utilities :refer [defroutes-with-crud]]))
+  (require [compojure.core :refer [GET POST DELETE defroutes]]
+           [uma.models.horse :refer :all]
+           [uma.utilities :refer [defroutes-with-crud json-response]]))
 
-(defroutes-with-crud routes
-  {:read-all horse/get-horses
-   :read-by-id horse/get-horse-by-id
-   :create horse/create-horse
-   :update horse/update-horse
-   :delete horse/delete-horse
-   :mapfn horse/mapfn})
+(defroutes routes
+  (GET "/" []
+    (json-response
+      (get-horses)))
+  (POST "/" {:keys [params]}
+    (json-response
+      (create-horse (mapfn params))))
+  (GET "/:id" [id]
+    (json-response
+      (let [as-integer (Integer. id)]
+        (get-horse-by-id as-integer))))
+  (POST "/:id" {:keys [params]}
+    (json-response
+      (let [as-integer (Integer. (:id params))
+            mapped (mapfn (dissoc params :id))]
+        (update-horse as-integer mapped))))
+  (DELETE "/:id" [id]
+    (json-response
+      (let [as-integer (Integer. id)]
+        (delete-horse as-integer)))))

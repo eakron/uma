@@ -1,11 +1,25 @@
 (ns uma.routes.user
-  (require [uma.models.user :as user]
-           [uma.utilities :refer [defroutes-with-crud]]))
+  (require [compojure.core :refer [GET POST DELETE defroutes]]
+           [uma.models.user :refer :all]
+           [uma.utilities :refer [defroutes-with-crud json-response]]))
 
-(defroutes-with-crud routes
-  {:read-all user/get-users
-   :read-by-id user/get-user-by-id
-   :create user/create-user
-   :update user/update-user
-   :delete user/delete-user
-   :mapfn user/mapfn})
+(defroutes routes
+  (GET "/" []
+    (json-response
+      (get-users)))
+  (POST "/" {:keys [params]}
+    (json-response
+      (create-user (mapfn params))))
+  (GET "/:id" [id]
+    (json-response
+      (let [as-integer (Integer. id)]
+        (get-user-by-id as-integer))))
+  (POST "/:id" {:keys [params]}
+    (json-response
+      (let [as-integer (Integer. (:id params))
+            mapped (mapfn (dissoc params :id))]
+        (update-user as-integer mapped))))
+  (DELETE "/:id" [id]
+    (json-response
+      (let [as-integer (Integer. id)]
+        (delete-user as-integer)))))

@@ -1,16 +1,29 @@
 (ns uma.routes.course
-  (require [uma.models.course :as course]
-           [uma.utilities :refer [defroutes-with-crud json-response]]
-           [compojure.core :refer [GET]]))
+  (require [compojure.core :refer [GET POST DELETE defroutes]]
+           [uma.models.course :refer :all]
+           [uma.utilities :refer [defroutes-with-crud json-response]]))
 
-(defroutes-with-crud routes
-  {:read-all course/get-courses
-   :read-by-id course/get-course-by-id
-   :create course/create-course
-   :update course/update-course
-   :delete course/delete-course
-   :mapfn course/mapfn}
+(defroutes routes
+  (GET "/" []
+    (json-response
+      (get-courses)))
+  (POST "/" {:keys [params]}
+    (json-response
+      (create-course (mapfn params))))
+  (GET "/:id" [id]
+    (json-response
+      (let [as-integer (Integer. id)]
+        (get-course-by-id as-integer))))
+  (POST "/:id" {:keys [params]}
+    (json-response
+      (let [as-integer (Integer. (:id params))
+            mapped (mapfn (dissoc params :id))]
+        (update-course as-integer mapped))))
+  (DELETE "/:id" [id]
+    (json-response
+      (let [as-integer (Integer. id)]
+        (delete-course as-integer))))
   (GET "/:id/users" [id]
     (json-response
       (let [as-integer (Integer. id)]
-        (course/get-registered-users as-integer)))))
+        (get-registered-users as-integer)))))
