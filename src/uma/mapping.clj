@@ -11,7 +11,12 @@
   (java.sql.Timestamp/valueOf value))
 
 (defmethod map-to-clj :time [_ value]
-  (java.sql.Time/valueOf value))
+  "java.sql.Time/valueOf expects a string in the format \"00:00:00\"
+  but our use case doesn't need seconds. If we get \"00:00\" we
+  simply add 0 seconds to it."
+  (if (-> value (clojure.string/split #":") count (= 3))
+    (java.sql.Time/valueOf value)
+    (java.sql.Time/valueOf (str value ":00"))))
 
 (defmethod map-to-clj :default [_ value]
   value)
