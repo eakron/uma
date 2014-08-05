@@ -22,7 +22,6 @@
   [object mapping]
   (reduce
     (fn [acc [attribute type]]
-      (println (str attribute " " type))
       (if (contains? object attribute)
         (assoc acc attribute (map-to-clj type (attribute object)))
         acc))
