@@ -1,6 +1,5 @@
 (ns uma.database
   (require [environ.core :refer [env]]
-           [clojure.data.json :as json]
            [korma.core :refer [exec-raw]]
            [taoensso.timbre :as timbre]
            [korma.db :refer [defdb postgres]])
@@ -11,16 +10,6 @@
                      :password (env :database-password)
                      :host (env :database-host)
                      :port "5432"}))
-
-(extend-type java.sql.Time
-  json/JSONWriter
-  (-write [date out]
-    (json/-write (str date) out)))
-
-(extend-type java.sql.Timestamp
-  json/JSONWriter
-  (-write [date out]
-    (json/-write (str date) out)))
 
 (defn create-tables! []
   (let [schema (slurp "src/uma/schema.sql")
