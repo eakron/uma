@@ -7,17 +7,17 @@
   (GET "/" []
     (json-response
       (get-occasions)))
-  (POST "/" {:keys [params]}
+  (POST "/" {:keys [body]}
     (json-response
-      (create-occasion (mapfn params))))
+      (create-occasion (mapfn body))))
   (GET "/:id" [id]
     (json-response
       (let [as-integer (Integer. id)]
         (get-occasion-by-id as-integer))))
-  (POST "/:id" {:keys [params]}
+  (POST "/:id" {:keys [body params]}
     (json-response
       (let [as-integer (Integer. (:id params))
-            mapped (mapfn (dissoc params :id))]
+            mapped (mapfn (dissoc body :id))]
         (update-occasion as-integer mapped))))
   (DELETE "/:id" [id]
     (json-response

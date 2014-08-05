@@ -7,17 +7,17 @@
   (GET "/" []
     (json-response
       (get-horses)))
-  (POST "/" {:keys [params]}
+  (POST "/" {:keys [body]}
     (json-response
-      (create-horse (mapfn params))))
+      (create-horse (mapfn body))))
   (GET "/:id" [id]
     (json-response
       (let [as-integer (Integer. id)]
         (get-horse-by-id as-integer))))
-  (POST "/:id" {:keys [params]}
+  (POST "/:id" {:keys [body params]}
     (json-response
       (let [as-integer (Integer. (:id params))
-            mapped (mapfn (dissoc params :id))]
+            mapped (mapfn (dissoc body :id))]
         (update-horse as-integer mapped))))
   (DELETE "/:id" [id]
     (json-response
