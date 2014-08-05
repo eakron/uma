@@ -1,7 +1,7 @@
 (ns uma.routes.horse
   (require [compojure.core :refer [GET POST DELETE defroutes]]
            [uma.models.horse :refer :all]
-           [uma.utilities :refer [defroutes-with-crud json-response]]))
+           [uma.utilities :refer [json-response]]))
 
 (defroutes routes
   (GET "/" []

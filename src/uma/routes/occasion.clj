@@ -1,7 +1,7 @@
 (ns uma.routes.occasion
   (require [compojure.core :refer [GET POST DELETE defroutes]]
            [uma.models.occasion :refer :all]
-           [uma.utilities :refer [defroutes-with-crud json-response]]))
+           [uma.utilities :refer [json-response]]))
 
 (defroutes routes
   (GET "/" []
