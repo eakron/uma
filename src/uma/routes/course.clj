@@ -1,6 +1,7 @@
 (ns uma.routes.course
   (require [compojure.core :refer [GET POST DELETE defroutes]]
            [uma.models.course :refer :all]
+           [uma.models.user :as user]
            [uma.utilities :refer [json-response]]))
 
 (defroutes routes
@@ -27,4 +28,9 @@
   (GET "/:id/users" [id]
     (json-response
       (let [as-integer (Integer. id)]
-        (get-registered-users as-integer)))))
+        (get-registered-users as-integer))))
+  (POST "/:id/users" {:keys [params body]}
+    (json-response
+      (let [course-id (Integer. (:id params))
+            user-id (:id body)]
+        (user/register-student course-id user-id)))))

@@ -1,6 +1,6 @@
 (ns uma.models.user
   (require [uma.database :as db]
-           [uma.models.entities :refer [course user]]
+           [uma.models.entities :refer [course user registered]]
            [uma.mapping :refer [defmapper]]
            [korma.core :refer :all]))
 
@@ -41,3 +41,8 @@
 (defn delete-user [id]
   (delete user
     (where {:id id})))
+
+(defn register-student [course-id user-id]
+  (insert registered
+    (values {:uma_user_id user-id
+             :course_id course-id})))
